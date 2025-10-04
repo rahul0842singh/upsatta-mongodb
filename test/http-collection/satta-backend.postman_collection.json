@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "satta-backend",
+    "_postman_id": "00000000-0000-0000-0000-000000000000",
+    "description": "Basic requests for satta-backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "List Games",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/games"
+      }
+    },
+    {
+      "name": "Create Result",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"gameCode\": \"GALI\", \"dateStr\": \"2025-09-26\", \"time\": \"03:40 PM\", \"value\": \"89\"}"
+        },
+        "url": "{{baseUrl}}/api/v1/results"
+      }
+    },
+    {
+      "name": "Snapshot",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/results/snapshot?dateStr=2025-09-26&time=23:59"
+      }
+    },
+    {
+      "name": "Timewise",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/results/timewise?dateStr=2025-09-26"
+      }
+    },
+    {
+      "name": "Monthly",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/results/monthly?year=2025&month=9&games=GALI,DSWR,GZBD,FRBD"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# env & logs
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# build output (if any in future)
+dist/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+.vercel
