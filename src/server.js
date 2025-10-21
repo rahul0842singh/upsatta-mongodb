@@ -1,4 +1,3 @@
-// src/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -8,32 +7,28 @@ const { fixGameIndexes } = require('./utils/indexes');
 
 const app = express();
 
-/**
- * ⚠️ VERY PERMISSIVE CORS:
- *   - origin: true  → reflect the request's Origin header (allows ALL origins)
- *   - credentials: true → allow cookies/authorization headers
- * If you want an allowlist instead, see the commented "allowlist" version below.
- */
+// ⚙️ CORS Setup (same as before)
 const corsOptions = {
-  origin: true, // reflect request origin (allows all)
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
-
 app.use(cors(corsOptions));
-// Preflight for all routes
 app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
+// ✅ Existing Routes
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/games', require('./routes/games'));
 app.use('/api/v1/results', require('./routes/results'));
 
-// Health
+// ✅ New Payments Route
+app.use('/api/v1/payments', require('./routes/paymentRoutes'));
+
+// Health Route
 app.get('/health', (_req, res) => res.json({ ok: true }));
 
 const PORT = process.env.PORT || 4000;
